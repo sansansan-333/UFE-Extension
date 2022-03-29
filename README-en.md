@@ -30,5 +30,3 @@ It can be created by right-clicking on the Project view and selecting Create > U
 The created file can be edited from the Extension window, which can be opened by selecting Window > U.F.E. > Extension from the menu at the top of the screen.
 
 Drag and drop the created UFE Extension file into the Extension Info of the UFEExtension.cs file attached in the second step of the installation procedure.
-
-Translated with www.DeepL.com/Translator (free version)
