@@ -22,4 +22,17 @@ public static class TypeUtility
 
         return result;
     }
+
+    public static System.Reflection.MethodInfo GetGenericMethodInfo(string methodName, Type t) {
+        var mi = typeof(UFE).GetMethod(methodName);
+        return mi.MakeGenericMethod(t);
+    }
+
+    public static object CallGenericMethod(string methodName, Type t, object instance, object[] parameters) {
+        return GetGenericMethodInfo(methodName, t).Invoke(instance, parameters);
+    }
+
+    public static object CallGenericStaticMethod(string methodName, Type t, object[] parameters) {
+        return CallGenericMethod(methodName, t, null, parameters);
+    }
 }

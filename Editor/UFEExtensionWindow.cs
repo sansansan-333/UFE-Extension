@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
+using System;
 
 /// <summary>
 /// Custom window for added features in UFE
@@ -11,9 +12,13 @@ public class UFEExtensionWindow : EditorWindow
     private UFEExtensionInfo extensionInfo;
     private Vector2 scrollPos;
 
+    // AI
     private bool aiSettings;
     private int aiEngineindex;
+    private int p1AIEngineIndex;
+    private int p2AIEngineIndex;
 
+    // Game recording
     private bool recordSettings;
 
     [MenuItem("Window/U.F.E./Extension")]
@@ -58,6 +63,8 @@ public class UFEExtensionWindow : EditorWindow
 
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         {
+            EditorGUIUtility.labelWidth = 150;
+
             // AI setttings
             EditorGUILayout.BeginVertical("GroupBox");
             {
@@ -75,9 +82,25 @@ public class UFEExtensionWindow : EditorWindow
                             EditorGUILayout.LabelField("AI engine");
 
                             EditorGUI.indentLevel++;
-                            var aiEngineOptions = UFEExtension.aiEngines.Select(elem => elem.ToString()).ToArray();
-                            aiEngineindex = EditorGUILayout.Popup(aiEngineindex, aiEngineOptions);
-                            extensionInfo.aiEngine = new SerializableSystemType(UFEExtension.aiEngines[aiEngineindex]);
+                            {
+                                var aiEngineOptions = UFEExtension.aiEngines.Select(elem => elem.ToString()).ToArray();
+
+                                EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Player 1");
+                                    p1AIEngineIndex = EditorGUILayout.Popup(p1AIEngineIndex, aiEngineOptions);
+                                }
+                                EditorGUILayout.EndHorizontal();
+                                EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Player 2");
+                                    p2AIEngineIndex = EditorGUILayout.Popup(p2AIEngineIndex, aiEngineOptions);
+                                }
+                                EditorGUILayout.EndHorizontal();
+
+                                extensionInfo.p1AIEngine = new SerializableSystemType(UFEExtension.aiEngines[p1AIEngineIndex]);
+                                extensionInfo.p2AIEngine = new SerializableSystemType(UFEExtension.aiEngines[p2AIEngineIndex]);
+                            }
                             EditorGUI.indentLevel--;
                         }
                     }
@@ -118,10 +141,24 @@ public class UFEExtensionWindow : EditorWindow
                             }
                             EditorGUILayout.EndHorizontal();
                             EditorGUI.indentLevel++;
-                            extensionInfo.savePath = EditorGUILayout.TextField(extensionInfo.savePath);
+                            {
+                                extensionInfo.savePath = EditorGUILayout.TextField(extensionInfo.savePath);
+                            }
                             EditorGUI.indentLevel--;
                         }
                         EditorGUILayout.EndVertical();
+
+                        // description
+                        EditorGUILayout.BeginVertical();
+                        {
+                            EditorGUILayout.LabelField("Description");
+                            EditorGUI.indentLevel++;
+                            {
+                                extensionInfo.description = EditorGUILayout.TextArea(extensionInfo.description);
+                            }
+                            EditorGUI.indentLevel--;
+                        }
+                        EditorGUILayout.EndHorizontal();
                     }
                 }
             }
@@ -129,7 +166,7 @@ public class UFEExtensionWindow : EditorWindow
         }
         EditorGUILayout.EndScrollView();
 
-        // save
+        // save UFE extension file
         if (EditorGUI.EndChangeCheck()) {
             EditorUtility.SetDirty(extensionInfo);
             AssetDatabase.SaveAssets();

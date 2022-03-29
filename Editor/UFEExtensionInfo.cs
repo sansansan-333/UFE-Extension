@@ -7,9 +7,11 @@ using System;
 public class UFEExtensionInfo : ScriptableObject {
     // AI
     public bool overrideAI;
-    public SerializableSystemType aiEngine;
+    public SerializableSystemType p1AIEngine;
+    public SerializableSystemType p2AIEngine;
 
     // Game recording
     public bool recordGame;
     public string savePath;
+    public string description;
 }

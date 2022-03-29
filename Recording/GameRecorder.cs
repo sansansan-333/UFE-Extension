@@ -41,7 +41,7 @@ public class GameRecorder : MonoBehaviour
         record = new GameRecord();
         record.UUID = Guid.NewGuid().ToString();
         record.date = DateTime.Now.ToString();
-        record.description = "test";
+        record.description = UFEExtension.Instance.ExtensionInfo.description;
         record.frames = new List<FrameData>();
     }
 
@@ -62,16 +62,22 @@ public class GameRecorder : MonoBehaviour
         FrameData frame = new FrameData();
         frame.currentFrame = currentFrame - frameRoundStarted;
         frame.p1GameState = new CharacterState {
-            life = (int)p1CharacterStateHistory.life
+            life = (int)p1CharacterStateHistory.life,
+            distance = (float)p1CharacterStateHistory.normalizedDistance,
+            isDown = p1CharacterStateHistory.currentState == PossibleStates.Down,
+            isBlocking = p1CharacterStateHistory.isBlocking
         };
         frame.p2GameState = new CharacterState {
-            life = (int)p2CharacterStateHistory.life
+            life = (int)p2CharacterStateHistory.life,
+            distance = (float)p2CharacterStateHistory.normalizedDistance,
+            isDown = p2CharacterStateHistory.currentState == PossibleStates.Down,
+            isBlocking = p2CharacterStateHistory.isBlocking
         };
         frame.p1Input = new Input {
-            buttons = (int)p1InputHistory.buttons
+            buttons = p1InputHistory.buttons.ToButtonPresses().Select(elem => elem.ToString()).ToArray()
         };
         frame.p2Input = new Input {
-            buttons = (int)p2InputHistory.buttons
+            buttons = p2InputHistory.buttons.ToButtonPresses().Select(elem => elem.ToString()).ToArray()
         };
 
         record.frames.Add(frame);

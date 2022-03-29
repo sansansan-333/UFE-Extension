@@ -33,10 +33,13 @@ public class GameRecord
     [Serializable]
     public class CharacterState {
         public int life;
+        public float distance;
+        public bool isDown;
+        public bool isBlocking;
     }
 
     [Serializable]
     public class Input {
-        public int buttons;
+        public string[] buttons;
     }
 }

@@ -1,7 +1,10 @@
 # UFE Extension
+![Screenshot 2022-03-29 180737](https://user-images.githubusercontent.com/61408011/160576464-eb8c0277-1dc4-4e3c-b2f8-376ee6a0fb2c.png)
+
 UFE Extensionは、UFEエンジンに追加機能を実装するものです。
 UFEの元のコードをなるべく変更することなく機能を追加することを目標に作成しています。
 
+[English README](https://github.com/sansansan-333/UFE-Extension/blob/main/README-en.md)
 
 ## 導入
 1. UFE/Engine/Scripts/Core以下にこのフォルダを置く。
@@ -35,7 +38,7 @@ Projectビューを右クリック、Create > U.F.E. > Extension Fileを選択�
 
 項目別の使い方は以下を参照してください。
 
-## AI Settings
+### AI Settings
 - Override AI
 
 CPU戦でExtension内のAIを使うかどうかを指定します。
@@ -44,16 +47,18 @@ CPU戦でExtension内のAIを使うかどうかを指定します。
 
 Override AIがONの場合表示されます。AIの種類を指定します。BaseAIを継承しているクラスがここに表示されます。
 
-## Record games
+### Record games
 - Record games
 
-試合のデータを記録するかどうかを指定します。
+Game Recordingを記録するかどうかを指定します。
 
 - Folder
 
-試合のデータの保存先を指定します。
+Game Recordingの保存先を指定します。
 
-## Game Recordingsの内容を変更する
+- Description
+
+保存されるjsonのdescriptionに入る値を指定します。
 
 
 ## AIを自作する
@@ -64,7 +69,3 @@ UFE Extension内で外部プラグインを使いたい場合（例えばAIを�
 1. Extensionフォルダ以下の好きな場所にPluginsフォルダを作る。
 2. Pluginsフォルダに追加したいプラグインを置く。
 3. UFE/Engine/Scripts/Core/UFE3D.asmdefを選択し、インスペクターから"Assembly References"の欄にプラグインを追加する。
-
-## TODO
-- AI作成のためのスクリプト自動作成
-- AIのパラメータをGUIで設定するための機能

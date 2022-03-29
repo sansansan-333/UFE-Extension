@@ -2,24 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UFE3D;
-
-[DefaultExecutionOrder(100)] 
-public partial class UFE {
-    public static void OverrideRandomAIwith<T>() where T : BaseAI{
-        GameObject ufeManager = FindObjectOfType<UFE>().gameObject;
-
-        p1RandomAI = ufeManager.AddComponent<T>();
-        p1RandomAI.player = 1;
-        p2RandomAI = ufeManager.AddComponent<T>();
-        p2RandomAI.player = 2;
-    }
-}
 
 [DefaultExecutionOrder(200)] // after UFE.cs
 public class UFEExtension : SingletonMonoBehaviour<UFEExtension>{
     [SerializeField]
     private UFEExtensionInfo extensionInfo;
+    public UFEExtensionInfo ExtensionInfo { get { return this.extensionInfo; } }
     public string extensionPath { get; private set; }
 
     private GameRecorder gameRecorder;
@@ -32,10 +20,8 @@ public class UFEExtension : SingletonMonoBehaviour<UFEExtension>{
         extensionPath = Application.dataPath + "/UFE/Engine/Scripts/Core/Extension";
 
         if (extensionInfo.overrideAI) {
-            // call UFE.OverrideRandomAIWith<T> with selected AI type
-            var mi = typeof(UFE).GetMethod("OverrideRandomAIwith");
-            var genericMi = mi.MakeGenericMethod(extensionInfo.aiEngine.GetSystemType());
-            genericMi.Invoke(null, null);
+            TypeUtility.CallGenericStaticMethod("OverrideRandomAIwith", extensionInfo.p1AIEngine.GetSystemType(), new object[] { 1 });
+            TypeUtility.CallGenericStaticMethod("OverrideRandomAIwith", extensionInfo.p2AIEngine.GetSystemType(), new object[] { 2 });
         }
 
         if (extensionInfo.recordGame) {
@@ -53,11 +39,30 @@ public class UFEExtension : SingletonMonoBehaviour<UFEExtension>{
     }
 
     /// <summary>
-    /// Check if UFE Extension is working by finding a object that UFEExtension.cs is attached to in current scene.
+    /// Check if UFE Extension is working by finding a object that UFEExtension.cs is attached to in a current scene.
     /// </summary>
     /// <returns></returns>
     public static bool IsAvailable() {
         if (FindObjectOfType<UFEExtension>() != null) return true;
         else return false;
+    }
+}
+
+[DefaultExecutionOrder(100)]
+public partial class UFE {
+    public static void OverrideRandomAIwith<T>(int player) where T : BaseAI {
+        GameObject ufeManager = FindObjectOfType<UFE>().gameObject;
+
+        if(player == 1) {
+            p1RandomAI = ufeManager.AddComponent<T>();
+            p1RandomAI.player = 1;
+        }
+        else if(player == 2) {
+            p2RandomAI = ufeManager.AddComponent<T>();
+            p2RandomAI.player = 2;
+        }
+        else {
+            Debug.LogError("Player number must be either 1 or 2.");
+        }
     }
 }
