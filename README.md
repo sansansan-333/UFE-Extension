@@ -9,9 +9,7 @@ UFEの元のコードをなるべく変更することなく機能を追加す�
 ## 導入
 1. UFE/Engine/Scripts/Core以下にこのフォルダを置く。
 
-2. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
-
-3. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
+2. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
 
 Before
 ```cs
@@ -25,6 +23,8 @@ After
 public partial class UFE : MonoBehaviour, UFEInterface
 ...
 ```
+
+3. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
 
 
 ## 使い方
