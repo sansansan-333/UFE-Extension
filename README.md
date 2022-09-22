@@ -7,9 +7,11 @@ UFEの元のコードをなるべく変更することなく機能を追加す�
 [English README](https://github.com/sansansan-333/UFE-Extension/blob/main/README-en.md)
 
 ## 導入
-1. UFE/Engine/Scripts/Core以下にこのフォルダを置く。
+1. このプロジェクトをクローンし、フォルダ名を "Extension" に変更する。
 
-2. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
+2. UFE/Engine/Scripts/Core以下にこのフォルダを置く。
+
+3. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
 
 Before
 ```cs
@@ -24,7 +26,7 @@ public partial class UFE : MonoBehaviour, UFEInterface
 ...
 ```
 
-3. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
+4. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
 
 
 ## 使い方

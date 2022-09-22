@@ -3,9 +3,11 @@
 
 
 ## Install
-1. Place this folder under UFE/Engine/Scripts/Core.
+1. Clone the project, and rename the top folder as "Extension".
 
-2. Open UFE/Engine/Scripts/Core/Manager/UFE.cs and edit as follows
+2. Place this folder under UFE/Engine/Scripts/Core.
+
+3. Open UFE/Engine/Scripts/Core/Manager/UFE.cs and edit as follows
 
 Before
 ```cs
@@ -20,7 +22,7 @@ public partial class UFE : MonoBehaviour, UFEInterface
 ...
 ```
 
-3. Place an empty Game Object in the scene and attach UFEExtension.cs to it.  
+4. Place an empty Game Object in the scene and attach UFEExtension.cs to it.  
 
 ## How to use
 First, a UFE Extension file must be created. It is like a configuration file for the extension.
