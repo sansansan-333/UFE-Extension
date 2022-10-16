@@ -7,9 +7,9 @@ UFEの元のコードをなるべく変更することなく機能を追加す�
 [English README](https://github.com/sansansan-333/UFE-Extension/blob/main/README-en.md)
 
 ## 導入
-1. このプロジェクトをクローンし、フォルダ名を "Extension" に変更する。
+1. このレポジトリをクローンし、Assetsフォルダ以下に置く。
 
-2. UFE/Engine/Scripts/Core以下にこのフォルダを置く。
+2. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
 
 3. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
 
@@ -25,8 +25,6 @@ After
 public partial class UFE : MonoBehaviour, UFEInterface
 ...
 ```
-
-4. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
 
 
 ## 使い方
@@ -64,10 +62,14 @@ Game Recordingの保存先を指定します。
 
 
 ## AIを自作する
-BaseAIを継承してね
+UFEExtensionでは、BaseAIを継承したクラスをオリジナルのAIとして動かすことができます。  
+いくつかの関数をオーバーロードする必要があります。例としてAI/SpamAI.csを参照してください。
 
 ## プラグインを追加する
 UFE Extension内で外部プラグインを使いたい場合（例えばAIを作るためにニューラルネットワーク用のフレームワークを入れたい、など）、次の作業を行う必要があります。
+
 1. Extensionフォルダ以下の好きな場所にPluginsフォルダを作る。
 2. Pluginsフォルダに追加したいプラグインを置く。
 3. UFE/Engine/Scripts/Core/UFE3D.asmdefを選択し、インスペクターから"Assembly References"の欄にプラグインを追加する。
+
+（３つ目の手順が必要なのは、UFEExtension全体がUFE3D.asmdefに属しているためです。）

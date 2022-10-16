@@ -4,7 +4,7 @@ using UnityEngine;
 using UFE3D;
 
 /// <summary>
-/// Base class of Original AI
+/// Base class of original AI
 /// </summary>
 public class BaseAI : RandomAI {
     public override void Initialize(IEnumerable<InputReferences> inputReferences) {

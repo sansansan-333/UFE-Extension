@@ -5,7 +5,7 @@ using UFE3D;
 
 public class SpamAI : BaseAI
 {
-    /// sample code: making AI spam Buttom5
+    /// sample code: AI that spams Buttom5
     public override void DoUpdate() {
         this.inputs.Clear();
         foreach (InputReferences input in this.inputReferences) {

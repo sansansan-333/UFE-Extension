@@ -2,22 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UFE3D;
+using System.Linq;
 
 [DefaultExecutionOrder(200)] // after UFE.cs
 public class UFEExtension : SingletonMonoBehaviour<UFEExtension>{
     [SerializeField]
     private UFEExtensionInfo extensionInfo;
     public UFEExtensionInfo ExtensionInfo { get { return this.extensionInfo; } }
-    public string extensionPath { get; private set; }
 
     private GameRecorder gameRecorder;
 
-    public static readonly List<Type> aiEngines = TypeUtility.GetSubClassOf(typeof(BaseAI));
+    public static readonly List<Type> aiEngines = TypeUtility.GetSubClassOf(typeof(BaseAI)).Concat(new[] { typeof(RandomAI) }).ToList();
 
     private void Awake() {
         CheckInstance();
-
-        extensionPath = Application.dataPath + "/UFE/Engine/Scripts/Core/Extension";
 
         if (extensionInfo.overrideAI) {
             TypeUtility.CallGenericStaticMethod("OverrideRandomAIwith", extensionInfo.p1AIEngine.GetSystemType(), new object[] { 1 });
@@ -50,7 +49,7 @@ public class UFEExtension : SingletonMonoBehaviour<UFEExtension>{
 
 [DefaultExecutionOrder(100)]
 public partial class UFE {
-    public static void OverrideRandomAIwith<T>(int player) where T : BaseAI {
+    public static void OverrideRandomAIwith<T>(int player) where T : RandomAI {
         GameObject ufeManager = FindObjectOfType<UFE>().gameObject;
 
         if(player == 1) {
