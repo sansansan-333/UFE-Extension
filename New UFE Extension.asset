@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: New UFE Extension
   m_EditorClassIdentifier: 
   overrideAI: 1
+  p1AIEngine:
+    assemblyQualifiedName: SpamAI, UFE3D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  p2AIEngine:
+    assemblyQualifiedName: RLAI, UFE3D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   recordGame: 0
   savePath: C:/Users/Riku/Desktop/other/fightingGame/Ufe2-RL-experiment/Ufe2/Assets/UFE
   description: hi

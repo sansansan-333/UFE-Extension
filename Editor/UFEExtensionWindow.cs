@@ -14,7 +14,6 @@ public class UFEExtensionWindow : EditorWindow
 
     // AI
     private bool aiSettings;
-    private int aiEngineindex;
     private int p1AIEngineIndex;
     private int p2AIEngineIndex;
 
@@ -83,6 +82,8 @@ public class UFEExtensionWindow : EditorWindow
 
                             EditorGUI.indentLevel++;
                             {
+                                p1AIEngineIndex = UFEExtension.aiEngines.FindIndex(ai => ai == extensionInfo.p1AIEngine.GetSystemType());
+                                p2AIEngineIndex = UFEExtension.aiEngines.FindIndex(ai => ai == extensionInfo.p2AIEngine.GetSystemType());
                                 var aiEngineOptions = UFEExtension.aiEngines.Select(elem => elem.ToString()).ToArray();
 
                                 EditorGUILayout.BeginHorizontal();

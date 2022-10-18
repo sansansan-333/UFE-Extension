@@ -6,7 +6,7 @@ using System;
 [System.Serializable]
 public class SerializableSystemType
 {
-    private string assemblyQualifiedName;
+    public string assemblyQualifiedName;
 
     public SerializableSystemType(Type t) {
         assemblyQualifiedName = t.AssemblyQualifiedName;
