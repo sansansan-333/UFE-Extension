@@ -10,7 +10,7 @@ using System;
 public class GameRecord
 {
     // integer to distinguish different data format
-    public int version = 0; 
+    public int version = 1; 
     // unique id
     public string UUID;
     // date
@@ -24,6 +24,7 @@ public class GameRecord
     [Serializable]
     public class FrameData {
         public int currentFrame;
+        public GameState gameState;
         public CharacterState p1GameState;
         public CharacterState p2GameState;
         public Input p1Input;
@@ -31,11 +32,17 @@ public class GameRecord
     }
 
     [Serializable]
+    public class GameState {
+        public float normalizedDistance;
+    }
+
+    [Serializable]
     public class CharacterState {
         public int life;
-        public float distance;
         public bool isDown;
+        public bool isJumping;
         public bool isBlocking;
+        public int frameAdvantage;
     }
 
     [Serializable]

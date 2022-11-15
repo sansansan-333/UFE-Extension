@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 
 using FrameData = GameRecord.FrameData;
+using GameState = GameRecord.GameState;
 using CharacterState = GameRecord.CharacterState;
 using Input = GameRecord.Input;
 
@@ -61,17 +62,24 @@ public class GameRecorder : MonoBehaviour
 
         FrameData frame = new FrameData();
         frame.currentFrame = currentFrame - frameRoundStarted;
+        frame.gameState = new GameState {
+            normalizedDistance = (float)p1CharacterStateHistory.normalizedDistance
+        };
         frame.p1GameState = new CharacterState {
             life = (int)p1CharacterStateHistory.life,
-            distance = (float)p1CharacterStateHistory.normalizedDistance,
             isDown = p1CharacterStateHistory.currentState == PossibleStates.Down,
-            isBlocking = p1CharacterStateHistory.isBlocking
+            isJumping = (p1CharacterStateHistory.currentState == PossibleStates.BackJump || p1CharacterStateHistory.currentState == PossibleStates.NeutralJump || p1CharacterStateHistory.currentState == PossibleStates.ForwardJump)
+                                && p1CharacterStateHistory.currentSubState != SubStates.Stunned,
+            isBlocking = p1CharacterStateHistory.isBlocking,
+            frameAdvantage = UFEUtility.CalcFrameAdvantage(1),
         };
         frame.p2GameState = new CharacterState {
             life = (int)p2CharacterStateHistory.life,
-            distance = (float)p2CharacterStateHistory.normalizedDistance,
             isDown = p2CharacterStateHistory.currentState == PossibleStates.Down,
-            isBlocking = p2CharacterStateHistory.isBlocking
+            isJumping = (p2CharacterStateHistory.currentState == PossibleStates.BackJump || p2CharacterStateHistory.currentState == PossibleStates.NeutralJump || p2CharacterStateHistory.currentState == PossibleStates.ForwardJump)
+                                && p2CharacterStateHistory.currentSubState != SubStates.Stunned,
+            isBlocking = p2CharacterStateHistory.isBlocking,
+            frameAdvantage = UFEUtility.CalcFrameAdvantage(2),
         };
         frame.p1Input = new Input {
             buttons = p1InputHistory.buttons.ToButtonPresses().Select(elem => elem.ToString()).ToArray()
@@ -85,7 +93,7 @@ public class GameRecorder : MonoBehaviour
 
     private void SaveRecord() {
         string json = JsonUtility.ToJson(record, true);
-        string fileName = $"{record.UUID}.json";
+        string fileName = $"game_record_{record.UUID}.json";
 
         if (savePath[savePath.Length - 1] != '/') savePath += "/";
 
