@@ -1,13 +1,20 @@
 # UFE Extension
 ![Screenshot 2022-03-29 180737](https://user-images.githubusercontent.com/61408011/160576464-eb8c0277-1dc4-4e3c-b2f8-376ee6a0fb2c.png)
 
+The UFE Extension implements additional functionality to the UFE engine.
+It is created with the goal of adding functionality without changing the original UFE code as much as possible.
+
+## Versions
+UFE2 2.4.1
 
 ## Install
 1. Clone this repo and place it under Assets.
 
-2. Place an empty Game Object in the scene and attach UFEExtension.cs to it.  
+2. Open "Demo_Fighter2D" scene in Assets/UFE/Demos/_2DFighter folder. 
 
-3. Open UFE/Engine/Scripts/Core/Manager/UFE.cs and edit as follows
+3. Place an empty Game Object in the scene and attach UFEExtension.cs to it.  
+
+4. Open UFE/Engine/Scripts/Core/Manager/UFE.cs and edit as follows
 
 Before
 ```cs

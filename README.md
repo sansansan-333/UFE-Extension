@@ -6,12 +6,17 @@ UFEの元のコードをなるべく変更することなく機能を追加す�
 
 [English README](https://github.com/sansansan-333/UFE-Extension/blob/main/README-en.md)
 
-## 導入
+## バージョン
+UFE2 2.4.1
+
+## 導入 
 1. このレポジトリをクローンし、Assetsフォルダ以下に置く。
 
-2. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
+2. Assets/UFE/Demos/_2DFighterにあるDemo_Fighter2Dシーンを開く。
 
-3. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
+3. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
+
+4. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
 
 Before
 ```cs
