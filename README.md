@@ -7,6 +7,8 @@ UFEの元のコードをなるべく変更することなく機能を追加す�
 [English README](https://github.com/sansansan-333/UFE-Extension/blob/main/README-en.md)
 
 ## バージョン
+Unity 2020.3.6
+
 UFE2 2.4.1
 
 ## 導入 

@@ -5,6 +5,8 @@ The UFE Extension implements additional functionality to the UFE engine.
 It is created with the goal of adding functionality without changing the original UFE code as much as possible.
 
 ## Versions
+Unity 2020.3.6
+
 UFE2 2.4.1
 
 ## Install
