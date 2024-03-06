@@ -16,7 +16,7 @@ UFE2 2.4.1
 
 2. Assets/UFE/Demos/_2DFighterにあるDemo_Fighter2Dシーンを開く。
 
-3. シーン内に空のGame Objectを置き、それにUFEExtension.csをアタッチする。  
+3. シーン内に空のGameObjectを置き、それにUFEExtension.csをアタッチする。  
 
 4. UFE/Engine/Scripts/Core/Manager/UFE.csを開き、以下のように編集する。
 
@@ -70,7 +70,7 @@ Game Recordingの保存先を指定します。
 
 ## AIを自作する
 UFEExtensionでは、BaseAIを継承したクラスをオリジナルのAIとして動かすことができます。  
-いくつかの関数をオーバーロードする必要があります。例としてAI/SpamAI.csを参照してください。
+いくつかの関数をオーバーライドする必要があります。例としてAI/SpamAI.csを参照してください。
 
 ## プラグインを追加する
 UFE Extension内で外部プラグインを使いたい場合（例えばAIを作るためにニューラルネットワーク用のフレームワークを入れたい、など）、次の作業を行う必要があります。
